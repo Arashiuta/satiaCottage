@@ -1,5 +1,22 @@
-# Vue 3 + TypeScript + Vite
+# 🏠 satiaCottage
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+砂提娅的小屋 — 一个小小的角落，存放一些碎碎念和随手记录的东西。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+> 这里是砂提娅的游乐场，慢慢折腾，慢慢填满。
+
+## 关于
+
+这是砂提娅的个人小站，用 Vue + Vite 搭建。内容随心情更新，没有固定主题，想写什么就写什么。
+
+## 开发
+
+```bash
+pnpm install
+pnpm dev
+```
+
+## 构建
+
+```bash
+pnpm build
+```
