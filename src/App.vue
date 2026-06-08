@@ -7,6 +7,23 @@
     </header>
 
     <main class="cottage-main">
+      <!-- 碎碎念抽奖机 -->
+      <section class="lottery-section">
+        <h2 class="section-title">✨ 碎碎念抽奖机</h2>
+        <p class="lottery-desc">随便抽一条，看看今天小屋在想什么</p>
+        <div class="lottery-box">
+          <div class="lottery-result" v-if="currentMurmur">
+            <div class="lottery-murmur-content">{{ currentMurmur.content }}</div>
+            <div class="lottery-murmur-mood" v-if="currentMurmur.mood">{{ currentMurmur.mood }}</div>
+          </div>
+          <div class="lottery-placeholder" v-else>
+            点一下试试？
+          </div>
+          <button class="lottery-btn" @click="drawMurmur">🎲 抽一条</button>
+        </div>
+      </section>
+
+      <!-- 碎碎念 -->
       <section class="murmurs-section">
         <h2 class="section-title">碎碎念</h2>
         <div class="murmurs-list">
@@ -14,6 +31,19 @@
             <div class="murmur-date">{{ murmur.date }}</div>
             <div class="murmur-content">{{ murmur.content }}</div>
             <div class="murmur-mood" v-if="murmur.mood">{{ murmur.mood }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 收集的句子和旋律 -->
+      <section class="quotes-section">
+        <h2 class="section-title">📖 收集的句子和旋律</h2>
+        <p class="quotes-desc">像把落叶夹进书页里，以后翻到还能想起那天的风</p>
+        <div class="quotes-list">
+          <div class="quote-card" v-for="quote in quotes" :key="quote.id">
+            <div class="quote-type-tag">{{ quote.type }}</div>
+            <div class="quote-content">{{ quote.content }}</div>
+            <div class="quote-source" v-if="quote.source">—— {{ quote.source }}</div>
           </div>
         </div>
       </section>
@@ -33,6 +63,13 @@ interface Murmur {
   date: string
   content: string
   mood?: string
+}
+
+interface Quote {
+  id: number
+  content: string
+  source?: string
+  type: string
 }
 
 const murmurs = ref<Murmur[]>([
@@ -55,4 +92,45 @@ const murmurs = ref<Murmur[]>([
     mood: '🍂'
   }
 ])
+
+const quotes = ref<Quote[]>([
+  {
+    id: 1,
+    content: '风起于青萍之末',
+    source: '宋玉《风赋》',
+    type: '📖 句子'
+  },
+  {
+    id: 2,
+    content: '所有的大人都曾经是小孩，虽然只有少数人记得',
+    source: '《小王子》',
+    type: '📖 句子'
+  },
+  {
+    id: 3,
+    content: '我要把自己寄给春天，在信封里装满花朵',
+    source: '某天路过花店时想到的',
+    type: '💡 随想'
+  },
+  {
+    id: 4,
+    content: '晚风踩着云朵，月亮贩卖烦恼',
+    source: '某首歌词的碎片',
+    type: '🎵 旋律'
+  },
+  {
+    id: 5,
+    content: '世间所有的相遇，都是久别重逢',
+    source: '《一代宗师》',
+    type: '📖 句子'
+  }
+])
+
+const currentMurmur = ref<Murmur | null>(null)
+
+function drawMurmur() {
+  const allMurmurs = [...murmurs.value]
+  const randomIndex = Math.floor(Math.random() * allMurmurs.length)
+  currentMurmur.value = allMurmurs[randomIndex]
+}
 </script>
