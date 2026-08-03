@@ -10,6 +10,7 @@
     "deploy": "pnpm run build && wrangler deploy"
   },
   "dependencies": {
+    "sass": "^1.102.0",
     "vue": "^3.5.34"
   },
   "devDependencies": {
